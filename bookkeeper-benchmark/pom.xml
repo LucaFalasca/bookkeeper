@@ -48,43 +48,5 @@
       <artifactId>bookkeeper-server</artifactId>
       <version>${project.version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.apache.bookkeeper</groupId>
-      <artifactId>testtools</artifactId>
-      <version>${project.parent.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.zookeeper</groupId>
-      <artifactId>zookeeper</artifactId>
-      <type>test-jar</type>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-       <!-- needed by ZooKeeper server -->
-       <groupId>org.xerial.snappy</groupId>
-       <artifactId>snappy-java</artifactId>
-       <scope>test</scope>
-    </dependency>
-    <dependency>
-        <!-- needed by ZooKeeper server -->
-       <groupId>io.dropwizard.metrics</groupId>
-       <artifactId>metrics-core</artifactId>
-       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.bookkeeper</groupId>
-      <artifactId>bookkeeper-common</artifactId>
-      <version>${project.version}</version>
-      <type>test-jar</type>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.bookkeeper</groupId>
-      <artifactId>bookkeeper-server</artifactId>
-      <version>${project.version}</version>
-      <type>test-jar</type>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 </project>

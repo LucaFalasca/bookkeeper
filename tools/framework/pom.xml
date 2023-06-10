@@ -34,11 +34,5 @@
       <artifactId>bookkeeper-common</artifactId>
       <version>${project.version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.apache.bookkeeper</groupId>
-      <artifactId>buildtools</artifactId>
-      <version>${project.parent.version}</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 </project>
