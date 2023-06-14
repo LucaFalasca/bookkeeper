@@ -111,6 +111,10 @@
     <src.dir>src/main/java</src.dir>
     <test.additional.args />
 
+    <!-- Luca Falasca -->
+    <sonar.organization>lucafalasca</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+
     <!-- dependencies -->
     <arquillian-cube.version>1.18.2</arquillian-cube.version>
     <arquillian-junit.version>1.6.0.Final</arquillian-junit.version>
@@ -1211,8 +1215,6 @@
       </activation>
       <properties>
         <nar.aolProperties>src/aarch64_aol.properties</nar.aolProperties>
-	<sonar.organization>lucafalasca</sonar.organization>
-  	<sonar.host.url>https://sonarcloud.io</sonar.host.url>
       </properties>
     </profile>
     <profile>
