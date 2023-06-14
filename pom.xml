@@ -1211,6 +1211,8 @@
       </activation>
       <properties>
         <nar.aolProperties>src/aarch64_aol.properties</nar.aolProperties>
+	<sonar.organization>lucafalasca</sonar.organization>
+  	<sonar.host.url>https://sonarcloud.io</sonar.host.url>
       </properties>
     </profile>
     <profile>
