@@ -69,6 +69,7 @@
     <module>microbenchmarks</module>
     <module>bookkeeper-slogger</module>
     <module>native-io</module>
+    <module>tests</module>
   </modules>
   <mailingLists>
     <mailingList>
