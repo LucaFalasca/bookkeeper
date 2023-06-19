@@ -34,4 +34,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B -e verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=LucaFalasca_bookkeeper
+        run: mvn -B -e verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=LucaFalasca_bookkeeper -P JaCoCoCoverage
+      - name: Upload report
+        uses: actions/upload-artifact@v3
+        with:
+          name: JaCoCoCoverage_Report
+          path: tests/target/site/jacoco-aggregate/
+          if-no-files-found: error
