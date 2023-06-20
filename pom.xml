@@ -838,6 +838,31 @@
       <artifactId>commons-configuration</artifactId>
     </dependency>
     <!-- test dependencies -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency><!-- Needed by junit -->
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-all</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-api-mockito2</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-module-junit4</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -1097,7 +1122,7 @@
 
     <!-- JaCoCo profile Luca Falasca-->
     <profile>
-      <id>JaCoCo-coverage</id>
+      <id>JacocoProfile</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
