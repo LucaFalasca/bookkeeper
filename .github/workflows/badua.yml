@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: 8.0.372
-          distribution: 'temurin' # Alternative distribution options are available.
+          distribution: 'zulu' # Alternative distribution options are available.
       - name: Cache Maven packages
         uses: actions/cache@v3
         with:
@@ -28,7 +28,7 @@ jobs:
         run: |
           git clone https://github.com/saeg/ba-dua
           cd ba-dua
-          git checkout d2401f0
+          git checkout 10d205c
           mvn clean install
           cd ..
       - name: Build and analyze bookkeeper project
