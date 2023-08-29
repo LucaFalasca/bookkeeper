@@ -356,7 +356,7 @@
         <activeByDefault>false</activeByDefault>
       </activation>
       <properties>
-        <ba-dua.version>0.6.0</ba-dua.version>
+        <ba-dua.version>0.4.0</ba-dua.version>
         <argLine>-javaagent:${maven.multiModuleProjectDirectory}/badua_jars/ba-dua-agent-rt-0.6.0-all.jar -Doutput.file=${project.build.directory}/badua.ser</argLine>
       </properties>
       <dependencies>
