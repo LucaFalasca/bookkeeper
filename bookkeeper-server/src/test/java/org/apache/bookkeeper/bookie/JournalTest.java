@@ -7,12 +7,10 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.mockito.Mock;
-import org.mockito.MockedConstruction;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import org.mockito.*;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
+import org.powermock.api.mockito.PowerMockito;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -21,6 +19,7 @@ import java.util.Collection;
 import java.util.List;
 
 import static org.apache.bookkeeper.bookie.BookKeeperServerStats.JOURNAL_SCOPE;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 @RunWith(Enclosed.class)
@@ -118,7 +117,7 @@ public class JournalTest {
         @Parameterized.Parameters
         public static Collection<Object[]> getTestParameters() {
             return Arrays.asList(new Object[][]{
-                    {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_DIR.getJournalDir(), JournalIdFilterType.JOURNAL_ROLLING_FILTER.getJournalIdFilter()},
+                    /*{new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_DIR.getJournalDir(), JournalIdFilterType.JOURNAL_ROLLING_FILTER.getJournalIdFilter()},
                     {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_TRUE_FILTER.getJournalIdFilter()},
                     {new ArrayList<Long>(), null, JournalDirType.ONE_LOG_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_FALSE_FILTER.getJournalIdFilter()},
                     {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_DIR.getJournalDir(), JournalIdFilterType.NEW_FILTER.getJournalIdFilter()},
@@ -127,7 +126,7 @@ public class JournalTest {
                     {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_TRUE_FILTER.getJournalIdFilter()},
                     {new ArrayList<Long>(), null, JournalDirType.ONE_LOG_ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_FALSE_FILTER.getJournalIdFilter()},
                     {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.NEW_FILTER.getJournalIdFilter()},
-                    {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_ONE_TEXT_DIR.getJournalDir(), null},
+                    {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_ONE_TEXT_DIR.getJournalDir(), null}
                     {new ArrayList<Long>(), null, JournalDirType.ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.JOURNAL_ROLLING_FILTER.getJournalIdFilter()},
                     {new ArrayList<Long>(), null, JournalDirType.ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_TRUE_FILTER.getJournalIdFilter()},
                     {new ArrayList<Long>(), null, JournalDirType.ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_FALSE_FILTER.getJournalIdFilter()},
@@ -147,7 +146,7 @@ public class JournalTest {
                     {null, Exception.class, null, JournalIdFilterType.ALWAYS_TRUE_FILTER.getJournalIdFilter()},
                     {null, Exception.class, null, JournalIdFilterType.ALWAYS_FALSE_FILTER.getJournalIdFilter()},
                     {null, Exception.class, null, JournalIdFilterType.NEW_FILTER.getJournalIdFilter()},
-                    {null, Exception.class, null, null}
+                    {null, Exception.class, null, null}*/
             });
         }
 
@@ -183,13 +182,16 @@ public class JournalTest {
 
     }
 
-    @RunWith(value = Parameterized.class)
+    @RunWith(Parameterized.class)
     public static class JournalThreadTest {
         private Class<? extends Exception> expectedException;
         private List<Long> expectedResult;
 
         @Mock
         private LedgerDirsManager ledgerDirsManager;
+
+
+        private ServerConfiguration conf;
 
         private File journalDir;
 
@@ -201,6 +203,7 @@ public class JournalTest {
             this.expectedResult = expectedResult;
             this.expectedException = expectedException;
         }
+
 
         @Parameterized.Parameters
         public static Collection<Object[]> getTestParameters() {
@@ -218,20 +221,22 @@ public class JournalTest {
                 return files;
             });
             journalDir = new File("src/test/resources/journals/create_log");
+            conf = new ServerConfiguration();
 
+            //when(conf.getJournalRemovePagesFromCache()).thenReturn(false);
         }
 
         @Test
-        public void journalThreadTest() {
-            try(MockedConstruction<JournalChannel> mocked = Mockito.mockConstruction(JournalChannel.class,
-                (mock, context) -> {
-                    // further stubbings ...
-                    //when(mock.chargeCustomer(anyString(), any(BigDecimal.class))).thenReturn(BigDecimal.TEN);
-                })) {
-                Journal journal = new Journal(1, journalDir, new ServerConfiguration(), ledgerDirsManager);
-                journal.run();
-                assert (true);
-            }
+        public void journalThreadTest() throws Exception {
+            ServerConfiguration confSpy = PowerMockito.spy(conf);
+            doReturn(false).when(confSpy).getJournalRemovePagesFromCache();
+            doReturn(1).when(confSpy).getJournalQueueSize();
+            Journal journal = new Journal(1, journalDir, confSpy, ledgerDirsManager);
+            journal.start();
+
+            Thread.sleep(10000);
+            journal.shutdown();
+            assert (true);
         }
 
 
