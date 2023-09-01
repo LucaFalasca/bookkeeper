@@ -40,7 +40,8 @@ public class JournalTest {
             ONE_LOG_ONE_TEXT_DIR,
             ONE_TEXT_DIR,
             NOT_EXISTING_DIR,
-            LOG_FILE;
+            LOG_FILE,
+            VOID_DIR;
 
             private final String PROJECT_ROOT_PATH = System.getProperty("user.dir");
 
@@ -56,6 +57,8 @@ public class JournalTest {
                         return new File(PROJECT_ROOT_PATH, "src/test/resources/journals/not_existing_dir");
                     case LOG_FILE:
                         return new File(PROJECT_ROOT_PATH, "src/test/resources/journals/logs_dir/0.log");
+                    case VOID_DIR:
+                        return new File(PROJECT_ROOT_PATH, "src/test/resources/journals/void_dir");
                     default:
                         return null;
                 }
@@ -150,13 +153,23 @@ public class JournalTest {
                     {null, Exception.class, null, JournalIdFilterType.ALWAYS_TRUE_FILTER.getJournalIdFilter()},
                     {null, Exception.class, null, JournalIdFilterType.ALWAYS_FALSE_FILTER.getJournalIdFilter()},
                     {null, Exception.class, null, JournalIdFilterType.NEW_FILTER.getJournalIdFilter()},
-                    {null, Exception.class, null, null}
+                    {null, Exception.class, null, null},
+
+                    {new ArrayList<Long>(), null, JournalDirType.VOID_DIR.getJournalDir(), null},
             });
         }
 
         @Before
         public void setUp() {
             MockitoAnnotations.initMocks(this);
+            if(journalDir != null && journalDir.getPath().substring(journalDir.getPath().length() - 8).equals("void_dir")) {
+                boolean succes = journalDir.mkdir();
+                if(!succes) {
+                    System.out.println("Could not create void dir");
+                }else {
+                    System.out.println("Created void dir");
+                }
+            }
         }
 
         @Test
@@ -164,7 +177,7 @@ public class JournalTest {
 
             try {
 
-                System.out.println("Journal dir:\n" + journalDir);
+                System.out.println("Journal dir:\n" + journalDir.getPath());
                 System.out.println("Journal dir list files:\n" + journalDir.listFiles());
 
                 List<Long> journalIds = Journal.listJournalIds(journalDir, journalIdFilter);
