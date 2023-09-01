@@ -18,7 +18,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import static org.apache.bookkeeper.bookie.BookKeeperServerStats.JOURNAL_SCOPE;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
@@ -40,7 +39,7 @@ public class JournalTest {
             ONE_LOG_DIR,
             ONE_LOG_ONE_TEXT_DIR,
             ONE_TEXT_DIR,
-            VOID_DIR,
+            NOT_EXISTING_DIR,
             LOG_FILE;
 
             private final String PROJECT_ROOT_PATH = System.getProperty("user.dir");
@@ -53,8 +52,8 @@ public class JournalTest {
                         return new File(PROJECT_ROOT_PATH, "src/test/resources/journals/logs_and_other_dir");
                     case ONE_TEXT_DIR:
                         return new File(PROJECT_ROOT_PATH, "src/test/resources/journals/other_files_dir");
-                    case VOID_DIR:
-                        return new File(PROJECT_ROOT_PATH, "src/test/resources/journals/void_dir");
+                    case NOT_EXISTING_DIR:
+                        return new File(PROJECT_ROOT_PATH, "src/test/resources/journals/not_existing_dir");
                     case LOG_FILE:
                         return new File(PROJECT_ROOT_PATH, "src/test/resources/journals/logs_dir/0.log");
                     default:
@@ -122,26 +121,31 @@ public class JournalTest {
                     {new ArrayList<Long>(), null, JournalDirType.ONE_LOG_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_FALSE_FILTER.getJournalIdFilter()},
                     {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_DIR.getJournalDir(), JournalIdFilterType.NEW_FILTER.getJournalIdFilter()},
                     {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_DIR.getJournalDir(), null},
+
                     {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.JOURNAL_ROLLING_FILTER.getJournalIdFilter()},
                     {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_TRUE_FILTER.getJournalIdFilter()},
                     {new ArrayList<Long>(), null, JournalDirType.ONE_LOG_ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_FALSE_FILTER.getJournalIdFilter()},
                     {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.NEW_FILTER.getJournalIdFilter()},
                     {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_ONE_TEXT_DIR.getJournalDir(), null},
+
                     {new ArrayList<Long>(), null, JournalDirType.ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.JOURNAL_ROLLING_FILTER.getJournalIdFilter()},
                     {new ArrayList<Long>(), null, JournalDirType.ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_TRUE_FILTER.getJournalIdFilter()},
                     {new ArrayList<Long>(), null, JournalDirType.ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_FALSE_FILTER.getJournalIdFilter()},
                     {new ArrayList<Long>(), null, JournalDirType.ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.NEW_FILTER.getJournalIdFilter()},
                     {new ArrayList<Long>(), null, JournalDirType.ONE_TEXT_DIR.getJournalDir(), null},
-                    {new ArrayList<Long>(), null, JournalDirType.VOID_DIR.getJournalDir(), JournalIdFilterType.JOURNAL_ROLLING_FILTER.getJournalIdFilter()},
-                    {new ArrayList<Long>(), null, JournalDirType.VOID_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_TRUE_FILTER.getJournalIdFilter()},
-                    {new ArrayList<Long>(), null, JournalDirType.VOID_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_FALSE_FILTER.getJournalIdFilter()},
-                    {new ArrayList<Long>(), null, JournalDirType.VOID_DIR.getJournalDir(), JournalIdFilterType.NEW_FILTER.getJournalIdFilter()},
-                    {new ArrayList<Long>(), null, JournalDirType.VOID_DIR.getJournalDir(), null},
+
+                    {new ArrayList<Long>(), null, JournalDirType.NOT_EXISTING_DIR.getJournalDir(), JournalIdFilterType.JOURNAL_ROLLING_FILTER.getJournalIdFilter()},
+                    {new ArrayList<Long>(), null, JournalDirType.NOT_EXISTING_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_TRUE_FILTER.getJournalIdFilter()},
+                    {new ArrayList<Long>(), null, JournalDirType.NOT_EXISTING_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_FALSE_FILTER.getJournalIdFilter()},
+                    {new ArrayList<Long>(), null, JournalDirType.NOT_EXISTING_DIR.getJournalDir(), JournalIdFilterType.NEW_FILTER.getJournalIdFilter()},
+                    {new ArrayList<Long>(), null, JournalDirType.NOT_EXISTING_DIR.getJournalDir(), null},
+
                     {new ArrayList<Long>(), null, JournalDirType.LOG_FILE.getJournalDir(), JournalIdFilterType.JOURNAL_ROLLING_FILTER.getJournalIdFilter()},
                     {new ArrayList<Long>(), null, JournalDirType.LOG_FILE.getJournalDir(), JournalIdFilterType.ALWAYS_TRUE_FILTER.getJournalIdFilter()},
                     {new ArrayList<Long>(), null, JournalDirType.LOG_FILE.getJournalDir(), JournalIdFilterType.ALWAYS_FALSE_FILTER.getJournalIdFilter()},
                     {new ArrayList<Long>(), null, JournalDirType.LOG_FILE.getJournalDir(), JournalIdFilterType.NEW_FILTER.getJournalIdFilter()},
                     {new ArrayList<Long>(), null, JournalDirType.LOG_FILE.getJournalDir(), null},
+
                     {null, Exception.class, null, JournalIdFilterType.JOURNAL_ROLLING_FILTER.getJournalIdFilter()},
                     {null, Exception.class, null, JournalIdFilterType.ALWAYS_TRUE_FILTER.getJournalIdFilter()},
                     {null, Exception.class, null, JournalIdFilterType.ALWAYS_FALSE_FILTER.getJournalIdFilter()},
