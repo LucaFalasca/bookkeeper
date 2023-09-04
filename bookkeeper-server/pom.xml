@@ -24,17 +24,6 @@
   </parent>
   <artifactId>bookkeeper-server</artifactId>
   <name>Apache BookKeeper :: Server</name>
-  <!--<repositories>
-    &lt;!&ndash;<repository>
-      <id>local-repo</id>
-      <url>file:///home/luca-fedora/.m2/repository</url>
-    </repository>&ndash;&gt;
-    <repository>
-      <id>local-repo</id>
-      <url>file://${project.basedir}/badua_jars</url>
-    </repository>
-  </repositories>-->
-
   <dependencies>
     <dependency>
       <groupId>org.apache.bookkeeper</groupId>
@@ -231,10 +220,6 @@
             </property>
           </properties>
         </configuration>-->
-        <!--<configuration>
-          -javaagent:./badua_jars/ba-dua-agent-rt-0.4.0-all.jar
-          -xbootclasspath/p:./badua_jars/ba-dua-agent-rt-0.4.0-all.jar
-        </configuration>-->
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -378,7 +363,6 @@
         <dependency>
           <groupId>br.usp.each.saeg</groupId>
           <artifactId>ba-dua-cli</artifactId>
-          <classifier>all</classifier>
           <version>${ba-dua.version}</version>
         </dependency>
       </dependencies>
