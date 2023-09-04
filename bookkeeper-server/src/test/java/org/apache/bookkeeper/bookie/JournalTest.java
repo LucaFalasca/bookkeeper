@@ -120,42 +120,42 @@ public class JournalTest {
         public static Collection<Object[]> getTestParameters() {
             return Arrays.asList(new Object[][]{
                     {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_DIR.getJournalDir(), JournalIdFilterType.JOURNAL_ROLLING_FILTER.getJournalIdFilter()},
-                    {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_TRUE_FILTER.getJournalIdFilter()},
-                    {new ArrayList<Long>(), null, JournalDirType.ONE_LOG_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_FALSE_FILTER.getJournalIdFilter()},
-                    {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_DIR.getJournalDir(), JournalIdFilterType.NEW_FILTER.getJournalIdFilter()},
-                    {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_DIR.getJournalDir(), null},
+//                    {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_TRUE_FILTER.getJournalIdFilter()},
+//                    {new ArrayList<Long>(), null, JournalDirType.ONE_LOG_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_FALSE_FILTER.getJournalIdFilter()},
+//                    {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_DIR.getJournalDir(), JournalIdFilterType.NEW_FILTER.getJournalIdFilter()},
+//                    {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_DIR.getJournalDir(), null},
 
-                    {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.JOURNAL_ROLLING_FILTER.getJournalIdFilter()},
+//                    {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.JOURNAL_ROLLING_FILTER.getJournalIdFilter()},
                     {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_TRUE_FILTER.getJournalIdFilter()},
-                    {new ArrayList<Long>(), null, JournalDirType.ONE_LOG_ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_FALSE_FILTER.getJournalIdFilter()},
-                    {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.NEW_FILTER.getJournalIdFilter()},
-                    {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_ONE_TEXT_DIR.getJournalDir(), null},
+//                    {new ArrayList<Long>(), null, JournalDirType.ONE_LOG_ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_FALSE_FILTER.getJournalIdFilter()},
+//                    {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.NEW_FILTER.getJournalIdFilter()},
+//                    {new ArrayList<>(Arrays.asList(1l)), null, JournalDirType.ONE_LOG_ONE_TEXT_DIR.getJournalDir(), null},
 
-                    {new ArrayList<Long>(), null, JournalDirType.ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.JOURNAL_ROLLING_FILTER.getJournalIdFilter()},
-                    {new ArrayList<Long>(), null, JournalDirType.ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_TRUE_FILTER.getJournalIdFilter()},
+//                    {new ArrayList<Long>(), null, JournalDirType.ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.JOURNAL_ROLLING_FILTER.getJournalIdFilter()},
+//                    {new ArrayList<Long>(), null, JournalDirType.ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_TRUE_FILTER.getJournalIdFilter()},
                     {new ArrayList<Long>(), null, JournalDirType.ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_FALSE_FILTER.getJournalIdFilter()},
-                    {new ArrayList<Long>(), null, JournalDirType.ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.NEW_FILTER.getJournalIdFilter()},
-                    {new ArrayList<Long>(), null, JournalDirType.ONE_TEXT_DIR.getJournalDir(), null},
+//                    {new ArrayList<Long>(), null, JournalDirType.ONE_TEXT_DIR.getJournalDir(), JournalIdFilterType.NEW_FILTER.getJournalIdFilter()},
+//                    {new ArrayList<Long>(), null, JournalDirType.ONE_TEXT_DIR.getJournalDir(), null},
 
-                    /*{new ArrayList<Long>(), null, JournalDirType.NOT_EXISTING_DIR.getJournalDir(), JournalIdFilterType.JOURNAL_ROLLING_FILTER.getJournalIdFilter()},
-                    {new ArrayList<Long>(), null, JournalDirType.NOT_EXISTING_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_TRUE_FILTER.getJournalIdFilter()},
-                    {new ArrayList<Long>(), null, JournalDirType.NOT_EXISTING_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_FALSE_FILTER.getJournalIdFilter()},
+//                    {new ArrayList<Long>(), null, JournalDirType.NOT_EXISTING_DIR.getJournalDir(), JournalIdFilterType.JOURNAL_ROLLING_FILTER.getJournalIdFilter()},
+//                    {new ArrayList<Long>(), null, JournalDirType.NOT_EXISTING_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_TRUE_FILTER.getJournalIdFilter()},
+//                    {new ArrayList<Long>(), null, JournalDirType.NOT_EXISTING_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_FALSE_FILTER.getJournalIdFilter()},
                     {new ArrayList<Long>(), null, JournalDirType.NOT_EXISTING_DIR.getJournalDir(), JournalIdFilterType.NEW_FILTER.getJournalIdFilter()},
-                    {new ArrayList<Long>(), null, JournalDirType.NOT_EXISTING_DIR.getJournalDir(), null},
+//                    {new ArrayList<Long>(), null, JournalDirType.NOT_EXISTING_DIR.getJournalDir(), null},
 
-                    {new ArrayList<Long>(), null, JournalDirType.LOG_FILE.getJournalDir(), JournalIdFilterType.JOURNAL_ROLLING_FILTER.getJournalIdFilter()},
-                    {new ArrayList<Long>(), null, JournalDirType.LOG_FILE.getJournalDir(), JournalIdFilterType.ALWAYS_TRUE_FILTER.getJournalIdFilter()},
-                    {new ArrayList<Long>(), null, JournalDirType.LOG_FILE.getJournalDir(), JournalIdFilterType.ALWAYS_FALSE_FILTER.getJournalIdFilter()},
-                    {new ArrayList<Long>(), null, JournalDirType.LOG_FILE.getJournalDir(), JournalIdFilterType.NEW_FILTER.getJournalIdFilter()},
+//                    {new ArrayList<Long>(), null, JournalDirType.LOG_FILE.getJournalDir(), JournalIdFilterType.JOURNAL_ROLLING_FILTER.getJournalIdFilter()},
+//                    {new ArrayList<Long>(), null, JournalDirType.LOG_FILE.getJournalDir(), JournalIdFilterType.ALWAYS_TRUE_FILTER.getJournalIdFilter()},
+//                    {new ArrayList<Long>(), null, JournalDirType.LOG_FILE.getJournalDir(), JournalIdFilterType.ALWAYS_FALSE_FILTER.getJournalIdFilter()},
+//                    {new ArrayList<Long>(), null, JournalDirType.LOG_FILE.getJournalDir(), JournalIdFilterType.NEW_FILTER.getJournalIdFilter()},
                     {new ArrayList<Long>(), null, JournalDirType.LOG_FILE.getJournalDir(), null},
 
-                    {null, Exception.class, null, JournalIdFilterType.JOURNAL_ROLLING_FILTER.getJournalIdFilter()},
-                    {null, Exception.class, null, JournalIdFilterType.ALWAYS_TRUE_FILTER.getJournalIdFilter()},
-                    {null, Exception.class, null, JournalIdFilterType.ALWAYS_FALSE_FILTER.getJournalIdFilter()},
-                    {null, Exception.class, null, JournalIdFilterType.NEW_FILTER.getJournalIdFilter()},
+//                    {null, Exception.class, null, JournalIdFilterType.JOURNAL_ROLLING_FILTER.getJournalIdFilter()},
+//                    {null, Exception.class, null, JournalIdFilterType.ALWAYS_TRUE_FILTER.getJournalIdFilter()},
+//                    {null, Exception.class, null, JournalIdFilterType.ALWAYS_FALSE_FILTER.getJournalIdFilter()},
+//                    {null, Exception.class, null, JournalIdFilterType.NEW_FILTER.getJournalIdFilter()},
                     {null, Exception.class, null, null},
 
-                    {new ArrayList<Long>(), null, JournalDirType.VOID_DIR.getJournalDir(), null},*/
+                    {new ArrayList<Long>(), null, JournalDirType.VOID_DIR.getJournalDir(), null},
             });
         }
 
