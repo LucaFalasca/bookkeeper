@@ -220,6 +220,10 @@
             </property>
           </properties>
         </configuration>-->
+        <!--<configuration>
+          -javaagent:./badua_jars/ba-dua-agent-rt-0.4.0-all.jar
+          -xbootclasspath/p:./badua_jars/ba-dua-agent-rt-0.4.0-all.jar
+        </configuration>-->
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -363,6 +367,7 @@
         <dependency>
           <groupId>br.usp.each.saeg</groupId>
           <artifactId>ba-dua-cli</artifactId>
+          <classifier>all</classifier>
           <version>${ba-dua.version}</version>
         </dependency>
       </dependencies>

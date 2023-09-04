@@ -959,6 +959,7 @@
           <forkedProcessTimeoutInSeconds>1800</forkedProcessTimeoutInSeconds>
           <rerunFailingTestsCount>${testRetryCount}</rerunFailingTestsCount>
         </configuration> -->
+
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

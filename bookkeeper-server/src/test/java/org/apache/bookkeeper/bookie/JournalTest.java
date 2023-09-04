@@ -155,7 +155,7 @@ public class JournalTest {
                     {null, Exception.class, null, JournalIdFilterType.NEW_FILTER.getJournalIdFilter()},
                     {null, Exception.class, null, null},
 
-                    {new ArrayList<Long>(), null, JournalDirType.VOID_DIR.getJournalDir(), null},
+                    {new ArrayList<Long>(), null, JournalDirType.VOID_DIR.getJournalDir(), null},*/
             });
         }
 
