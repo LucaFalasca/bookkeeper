@@ -24,16 +24,16 @@
   </parent>
   <artifactId>bookkeeper-server</artifactId>
   <name>Apache BookKeeper :: Server</name>
-  <repositories>
-    <!--<repository>
+  <!--<repositories>
+    &lt;!&ndash;<repository>
       <id>local-repo</id>
       <url>file:///home/luca-fedora/.m2/repository</url>
-    </repository>-->
+    </repository>&ndash;&gt;
     <repository>
       <id>local-repo</id>
       <url>file://${project.basedir}/badua_jars</url>
     </repository>
-  </repositories>
+  </repositories>-->
 
   <dependencies>
     <dependency>
