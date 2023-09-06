@@ -37,7 +37,8 @@ public class JournalTest {
             ONE_TEXT_DIR,
             NOT_EXISTING_DIR,
             LOG_FILE,
-            VOID_DIR;
+            VOID_DIR,
+            ADF_DIR;
 
             private final String PROJECT_ROOT_PATH = System.getProperty("user.dir");
 
@@ -55,6 +56,8 @@ public class JournalTest {
                         return new File(PROJECT_ROOT_PATH, "src/test/resources/journals/logs_dir/0.log");
                     case VOID_DIR:
                         return new File(PROJECT_ROOT_PATH, "src/test/resources/journals/void_dir");
+                    case ADF_DIR:
+                        return new File(PROJECT_ROOT_PATH, "src/test/resources/journals/adf_dir");
                     default:
                         return null;
                 }
@@ -65,7 +68,8 @@ public class JournalTest {
             JOURNAL_ROLLING_FILTER,
             ALWAYS_TRUE_FILTER,
             ALWAYS_FALSE_FILTER,
-            NEW_FILTER;
+            NEW_FILTER,
+            ADF_FILTER;
 
             public Journal.JournalIdFilter getJournalIdFilter() {
                 switch (this) {
@@ -99,6 +103,13 @@ public class JournalTest {
                                 return journalId > 0;
                             }
                         };
+                    case ADF_FILTER:
+                        return new Journal.JournalIdFilter() {
+                            @Override
+                            public boolean accept(long journalId) {
+                                return journalId > 1;
+                            }
+                        };
                     default:
                         return null;
                 }
@@ -122,7 +133,8 @@ public class JournalTest {
                     {new ArrayList<Long>(), null, JournalDirType.NOT_EXISTING_DIR.getJournalDir(), JournalIdFilterType.NEW_FILTER.getJournalIdFilter()},
                     {new ArrayList<Long>(), null, JournalDirType.LOG_FILE.getJournalDir(), null},
                     {null, Exception.class, null, null},
-                    {new ArrayList<Long>(), null, JournalDirType.VOID_DIR.getJournalDir(), null}
+                    {new ArrayList<Long>(), null, JournalDirType.VOID_DIR.getJournalDir(), null},
+                    {new ArrayList<>(Collections.singletonList(2L)), null, JournalDirType.ADF_DIR.getJournalDir(), JournalIdFilterType.ADF_FILTER.getJournalIdFilter()}
             });
         }
         @Before
