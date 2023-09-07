@@ -322,18 +322,21 @@
             <artifactId>pitest-maven</artifactId>
             <version>${pitest.version}</version>
             <configuration>
-              <!--<targetClasses>
+              <targetClasses>
                 <param>org.apache.bookkeeper.bookie.Journal</param>
               </targetClasses>
               <targetTests>
-                <param>org.apache.bookkeeper.bookie.JournalScanningJournalTest</param>
-                <param>org.apache.bookkeeper.bookie.JournalCheckpointCompletingTest</param>
-              </targetTests>-->
+                <param>org.apache.bookkeeper.bookie.JournalTest</param>
+              </targetTests>
               <avoidCallsTo>
                 <avoidCallsTo>org.slf4j</avoidCallsTo>
               </avoidCallsTo>
               <historyInputFile>${pitest.history.file}</historyInputFile>
               <historyOutputFile>${pitest.history.file}</historyOutputFile>
+              <!--<jvmArgs>
+                <jvmArg>-XX:&#45;&#45;mutationUnitSize 1</jvmArg>
+              </jvmArgs>-->
+              <mutationUnitSize>1</mutationUnitSize>>
             </configuration>
             <executions>
               <execution>
