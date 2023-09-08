@@ -122,7 +122,7 @@ public class Journal extends BookieCriticalThread implements CheckpointSource {
                 logs.add(id);
             }
         }
-        //Collections.sort(logs);
+        Collections.sort(logs);
         return logs;
     }
 
