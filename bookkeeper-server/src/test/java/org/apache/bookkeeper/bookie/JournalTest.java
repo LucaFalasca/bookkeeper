@@ -15,6 +15,7 @@ import org.powermock.api.mockito.PowerMockito;
 import java.io.File;
 import java.util.*;
 
+import static org.apache.commons.lang.ArrayUtils.reverse;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
@@ -25,7 +26,7 @@ public class JournalTest {
     public static class GetJournalIdsTest {
 
 
-        private final File journalDir;
+        private File journalDir;
         private final Journal.JournalIdFilter journalIdFilter;
         private static Class<? extends Exception> expectedException;
         private final List<Long> expectedResult;
@@ -134,7 +135,8 @@ public class JournalTest {
                     {new ArrayList<Long>(), null, JournalDirType.LOG_FILE.getJournalDir(), null},
                     {null, Exception.class, null, null},
                     {new ArrayList<Long>(), null, JournalDirType.VOID_DIR.getJournalDir(), null},
-                    {new ArrayList<>(Collections.singletonList(2L)), null, JournalDirType.ADF_DIR.getJournalDir(), JournalIdFilterType.ADF_FILTER.getJournalIdFilter()}
+                    {new ArrayList<>(Collections.singletonList(2L)), null, JournalDirType.ADF_DIR.getJournalDir(), JournalIdFilterType.ADF_FILTER.getJournalIdFilter()},
+                    {new ArrayList<>(Arrays.asList(1L, 2L)), null, JournalDirType.ADF_DIR.getJournalDir(), JournalIdFilterType.ALWAYS_TRUE_FILTER.getJournalIdFilter()}
             });
         }
         @Before
@@ -147,6 +149,14 @@ public class JournalTest {
                 }else {
                     System.out.println("Created void dir");
                 }
+            }
+
+            if(journalDir != null && journalDir.getPath().equals(JournalDirType.ADF_DIR.getJournalDir().getPath())) {
+                File[] output = journalDir.listFiles();
+                reverse(output);
+                System.out.println("reversed output:\n" + Arrays.toString(output));
+                journalDir = Mockito.spy(journalDir);
+                doReturn(output).when(journalDir).listFiles();
             }
         }
         @Test
