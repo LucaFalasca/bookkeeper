@@ -324,9 +324,11 @@
             <configuration>
               <targetClasses>
                 <param>org.apache.bookkeeper.bookie.Journal</param>
+                <param>org.apache.bookkeeper.bookie.FileInfo</param>
               </targetClasses>
               <targetTests>
                 <param>org.apache.bookkeeper.bookie.JournalTest</param>
+                <param>org.apache.bookkeeper.bookie.FileInfoTest</param>
               </targetTests>
               <avoidCallsTo>
                 <avoidCallsTo>org.slf4j</avoidCallsTo>
