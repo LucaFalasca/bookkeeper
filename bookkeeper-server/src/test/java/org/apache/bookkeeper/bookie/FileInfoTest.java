@@ -29,10 +29,12 @@ public class FileInfoTest {
     private Class<? extends Exception> expectedException;
     private int version;
     private int excplicitBufLength;
+    private String expectedExceptionMessage;
 
 
-    public FileInfoTest(Class<? extends Exception> expectedException, int magicBytes, byte[] masterKey, int lenMasterKey, int state, int version, int excplicitBufLength){
+    public FileInfoTest(Class<? extends Exception> expectedException, String expectedExceptionMessage, int magicBytes, byte[] masterKey, int lenMasterKey, int state, int version, int excplicitBufLength){
         this.expectedException = expectedException;
+        this.expectedExceptionMessage = expectedExceptionMessage;
         this.magicBytes = magicBytes;
         this.masterKey = masterKey;
         this.lenMasterKey = lenMasterKey;
@@ -44,7 +46,7 @@ public class FileInfoTest {
     @Parameterized.Parameters
     public static Collection<Object[]> data(){
         return Arrays.asList(new Object[][]{
-                {null, ByteBuffer.wrap("BKLE".getBytes(UTF_8)).getInt(), new byte[1], 1, 0, 1, 0},
+                /*{null, ByteBuffer.wrap("BKLE".getBytes(UTF_8)).getInt(), new byte[1], 1, 0, 1, 0},
                 {null, ByteBuffer.wrap("BKLE".getBytes(UTF_8)).getInt(), new byte[1], 2, 0, 1, 0}, // True expectedException: Exception.class
                 {null, ByteBuffer.wrap("BKLE".getBytes(UTF_8)).getInt(), new byte[1], 0, 0, 1, 0}, // True expectedException: Exception.class
                 {Exception.class, ByteBuffer.wrap("BKLE".getBytes(UTF_8)).getInt(), new byte[0], -1, 0, 0, 0}, // True expectedException: null
@@ -58,7 +60,25 @@ public class FileInfoTest {
                 {Exception.class, ByteBuffer.wrap("BKLE".getBytes(UTF_8)).getInt(), new byte[1], 1, 0, 1, -1},
 
                 //Badua Increment
-                {Exception.class, ByteBuffer.wrap("BKLE".getBytes(UTF_8)).getInt(), new byte[1], 1, 0, 2, 0},
+                {Exception.class, ByteBuffer.wrap("BKLE".getBytes(UTF_8)).getInt(), new byte[1], 1, 0, 2, 0},*/
+
+                {null, null, ByteBuffer.wrap("BKLE".getBytes(UTF_8)).getInt(), new byte[1], 1, 0, 1, 0},
+                {null, null, ByteBuffer.wrap("BKLE".getBytes(UTF_8)).getInt(), new byte[1], 2, 0, 1, 0}, // True expectedException: Exception.class
+                {null, null, ByteBuffer.wrap("BKLE".getBytes(UTF_8)).getInt(), new byte[1], 0, 0, 1, 0}, // True expectedException: Exception.class
+                {Exception.class, null, ByteBuffer.wrap("BKLE".getBytes(UTF_8)).getInt(), new byte[0], -1, 0, 0, 0}, // True expectedException: null
+                {null, null, ByteBuffer.wrap("BKLE".getBytes(UTF_8)).getInt(), new byte[0], 0, 0, 0, 0},
+                {null, null, ByteBuffer.wrap("BKLE".getBytes(UTF_8)).getInt(), new byte[0], 1, 1, 0, 0}, // True expectedException: Exception.class
+                {Exception.class, null, ByteBuffer.wrap("BKLU".getBytes(UTF_8)).getInt(), new byte[1], 1, 0, 1, 0},
+
+                //Jacoco Increment
+                {null, null, ByteBuffer.wrap("BKLE".getBytes(UTF_8)).getInt(), new byte[1], 1, 0, 1, 16},
+                {Exception.class, null, ByteBuffer.wrap("BKLE".getBytes(UTF_8)).getInt(), new byte[1], 1, 0, 1, 15},
+                {IOException.class, "ExplicitLacBufLength",ByteBuffer.wrap("BKLE".getBytes(UTF_8)).getInt(), new byte[1], 1, 0, 1, -1},
+
+                //Badua Increment
+                {Exception.class, null, ByteBuffer.wrap("BKLE".getBytes(UTF_8)).getInt(), new byte[1], 1, 0, 2, 0},
+
+                //Pit Increment*/
         });
     }
 
@@ -101,9 +121,11 @@ public class FileInfoTest {
         } catch (IOException e) {
             e.printStackTrace();
             if (expectedException != null && expectedException.isAssignableFrom(e.getClass())) {
-                assert (true);
+                if(expectedExceptionMessage != null && !e.getMessage().contains(expectedExceptionMessage))
+                    assert false;
+                assert true;
             } else {
-                assert (false);
+                assert false;
             }
         }
     }
