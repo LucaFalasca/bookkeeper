@@ -1,6 +1,7 @@
 package org.apache.bookkeeper.bookie;
 
 import org.apache.bookkeeper.conf.ServerConfiguration;
+import org.apache.commons.io.filefilter.FalseFileFilter;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -16,6 +17,8 @@ import java.io.File;
 import java.util.*;
 
 import static org.apache.commons.lang.ArrayUtils.reverse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
@@ -170,13 +173,13 @@ public class JournalTest {
                 System.out.println("Result:\n" + journalIds);
                 System.out.println("Expected result:\n" + expectedResult);
 
-                assert (journalIds.equals(expectedResult));
+                assertTrue (journalIds.equals(expectedResult));
             } catch (Exception e) {
                 System.out.println("Exception:\n" + e);
                 if (expectedException != null && expectedException.isAssignableFrom(e.getClass())) {
-                    assert (true);
+                    assertTrue(true);
                 } else {
-                    assert (false);
+                    fail();
                 }
             }
         }

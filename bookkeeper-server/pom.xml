@@ -337,8 +337,8 @@
               <historyOutputFile>${pitest.history.file}</historyOutputFile>
               <!--<jvmArgs>
                 <jvmArg>-XX:&#45;&#45;mutationUnitSize 1</jvmArg>
-              </jvmArgs>-->
-              <!--<mutationUnitSize>1</mutationUnitSize>>-->
+              </jvmArgs>--><!--
+              <mutationUnitSize>1</mutationUnitSize>-->
               <mutateStaticInitializers>true</mutateStaticInitializers>
             </configuration>
             <executions>
